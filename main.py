@@ -29,8 +29,8 @@ def start(message):
 def help(message):
     markup=telebot.types.InlineKeyboardMarkup()
     #кнопки калбек
-    button1=telebot.types.InlineKeyboardButton(text='эждневная подписку✅', callback_data='den')
-    button2=telebot.types.InlineKeyboardButton(text='еженедельная подписку✅', callback_data='nedelya')
+    button1=telebot.types.InlineKeyboardButton(text='еждневная подписка✅', callback_data='den')
+    button2=telebot.types.InlineKeyboardButton(text='еженедельная подписка✅', callback_data='nedelya')
 
     markup.add(button1)
     markup.add(button2)    
@@ -38,7 +38,7 @@ def help(message):
     этот бот находится в разработке⚙️🔧\n
     _______________________________________\n
 
-    можете подписатся на еже-дневную/недельную подписку✅:'''
+    можете подписаться на ежедневную/еденедельную подписку✅:'''
     bot.send_message(chat_id=message.chat.id, text=answer, reply_markup=markup)
 
 @bot.callback_query_handler(func=lambda call: True)
@@ -48,7 +48,7 @@ def callback_inline(call):
             if call.data == 'den':
                 bot.answer_callback_query(callback_query_id=call.id, text='подписка оформлена')
             elif call.data == 'nedelya':
-                bot.answer_callback_query(callback_query_id=call.id, text='Hello оформлена')
+                bot.answer_callback_query(callback_query_id=call.id, text='подписка оформлена')
 
     except:
 	       bot.send_message(message.chat.id, 'Ошибка!')
@@ -56,7 +56,7 @@ def callback_inline(call):
 @bot.message_handler(commands=['pogoda'])
 def send_pogoda(message):
     try:
-        bot.send_message(message.chat.id,'какой город?')
+        bot.send_message(message.chat.id,'какой ваш город?')
         place=message.text
         observation = owm.weather_at_place(place)
         w = observation.get_weather()
