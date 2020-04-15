@@ -19,8 +19,14 @@ bot=telebot.TeleBot(TOKEN)
 #старт
 @bot.message_handler(commands=['start'])
 def start(message):
-    bot.send_sticker(message.chat.id,'CAACAgIAAxkBAAPuXpNPjdOilp7Ja3mOu5T9S76S3CkAAiIBAAKmREgLEfW5zI8V9GYYBA')
-    bot.send_message(message.chat.id, "Добро пожаловать, {0.first_name}!\n----------------------------\nЯ - <b>{1.first_name}</b>, бот погоды)🌤\n----------------------------\nчтобы ознакомится с ботом⚙️-/help.".format(message.from_user, bot.get_me()),
+    sticker = 'CAACAgIAAxkBAAPuXpNPjdOilp7Ja3mOu5T9S76S3CkAAiIBAAKmREgLEfW5zI8V9GYYBA'
+    answer = """Добро пожаловать, {0.first_name}!
+    ----------------------------
+    Я - <b>{1.first_name}</b>, бот погоды)🌤
+    ----------------------------
+    чтобы ознакомится с ботом⚙️-/help."""
+    bot.send_sticker(message.chat.id, sticker)
+    bot.send_message(message.chat.id, answer.format(message.from_user, bot.get_me()),
         parse_mode='html')
 
 
