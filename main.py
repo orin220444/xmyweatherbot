@@ -60,24 +60,27 @@ def callback_inline(call):
 	       bot.send_message(message.chat.id, 'Ошибка!')
 #pogoda
 @bot.message_handler(commands=['pogoda'])
-def send_pogoda(message):
+def observation_request(message):
     try:
         bot.send_message(message.chat.id,'какой ваш город?')
-        place=message.text
-        observation = owm.weather_at_place(place)
-        w = observation.get_weather()
-        #переменная скорости ветра
-        wind=w.get_wind ()['speed']
-        #переменная влажности
-        humi=w.get_humidity ()
-        #переменная температуры
-        tem=w.get_temperature('celsius')['temp']
+        @bot.message_handler(func=lambda m: True)
+        def send_pogoda(message):
+            place=message.text
+            print(place)
+            observation = owm.weather_at_place(place)
+            w = observation.get_weather()
+            #переменная скорости ветра
+            wind=w.get_wind ()['speed']
+            #переменная влажности
+            humi=w.get_humidity ()
+            #переменная температуры
+            tem=w.get_temperature('celsius')['temp']
 
-        #сведения о погоде
-        answer='сейчас в '+place+' '+w.get_detailed_status()+'\n'
-        answer+='Температура около '+str(tem)+' c°'+'\n'
-        answer+= 'Влажность воздуха около '+str(humi)+' %'+'\n'
-        answer+='Скорость ветра около '+str(wind)+' м/c'
+            #сведения о погоде
+            answer='сейчас в '+place+' '+w.get_detailed_status()+'\n'
+            answer+='Температура около '+str(tem)+' c°'+'\n'
+            answer+= 'Влажность воздуха около '+str(humi)+' %'+'\n'
+            answer+='Скорость ветра около '+str(wind)+' м/c'
 
     except pyowm.exceptions.api_response_error.NotFoundError:
       bot.send_message(message.chat.id, 'Город не найден :(')
