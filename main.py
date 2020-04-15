@@ -65,6 +65,7 @@ def observation_request(message):
         bot.send_message(message.chat.id,'какой ваш город?')
         @bot.message_handler(func=lambda m: True)
         def send_pogoda(message):
+            try:
             place=message.text
             print(place)
             observation = owm.weather_at_place(place)
@@ -84,8 +85,8 @@ def observation_request(message):
 
     except pyowm.exceptions.api_response_error.NotFoundError:
       bot.send_message(message.chat.id, 'Город не найден :(')
-
-
+    except:
+        bot.send_message(message.chat.id, 'Ошибка!')
 
 
 
