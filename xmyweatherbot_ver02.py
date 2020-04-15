@@ -49,7 +49,7 @@ def callback_inline(call):
             elif call.data == 'nedelya':
                 bot.answer_callback_query(callback_query_id=call.id, text='Hello оформлена')
 
-     except:
+    except:
 	       bot.send_message(message.chat.id, 'Ошибка!')
 #pogoda
 @bot.message_handler(commands='pogoda')
