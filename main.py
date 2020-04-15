@@ -66,25 +66,26 @@ def observation_request(message):
         @bot.message_handler(func=lambda m: True)
         def send_pogoda(message):
             try:
-            place=message.text
-            print(place)
-            observation = owm.weather_at_place(place)
-            w = observation.get_weather()
-            #переменная скорости ветра
-            wind=w.get_wind ()['speed']
-            #переменная влажности
-            humi=w.get_humidity ()
-            #переменная температуры
-            tem=w.get_temperature('celsius')['temp']
+                place=message.text
+                print(place)
+                observation = owm.weather_at_place(place)
+                w = observation.get_weather()
+                #переменная скорости ветра
+                wind=w.get_wind ()['speed']
+                #переменная влажности
+                humi=w.get_humidity ()
+                #переменная температуры
+                tem=w.get_temperature('celsius')['temp']
 
-            #сведения о погоде
-            answer='сейчас в '+place+' '+w.get_detailed_status()+'\n'
-            answer+='Температура около '+str(tem)+' c°'+'\n'
-            answer+= 'Влажность воздуха около '+str(humi)+' %'+'\n'
-            answer+='Скорость ветра около '+str(wind)+' м/c'
+                #сведения о погоде
+                answer='сейчас в '+place+' '+w.get_detailed_status()+'\n'
+                answer+='Температура около '+str(tem)+' c°'+'\n'
+                answer+= 'Влажность воздуха около '+str(humi)+' %'+'\n'
+                answer+='Скорость ветра около '+str(wind)+' м/c'
 
-    except pyowm.exceptions.api_response_error.NotFoundError:
-      bot.send_message(message.chat.id, 'Город не найден :(')
+                bot.send_message(message.chat.id, answer)
+            except pyowm.exceptions.api_response_error.NotFoundError:
+                bot.send_message(message.chat.id, 'Город не найден :(')
     except:
         bot.send_message(message.chat.id, 'Ошибка!')
 
