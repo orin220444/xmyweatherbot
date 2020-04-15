@@ -10,7 +10,7 @@ import pyowm
 from telebot import types
 #owm
 owm_key=os.getenv("OWM")
-owm = pyowm.OWM(owm_key,language='ru') 
+owm = pyowm.OWM(owm_key,language='ru')
 # telebot
 TOKEN=os.getenv("BOT_TOKEN")
 bot=telebot.TeleBot(TOKEN)
@@ -29,11 +29,11 @@ def start(message):
 def help(message):
     markup=telebot.types.InlineKeyboardMarkup()
     #кнопки калбек
-    button1=telebot.types.InlineKeyboardButton(text='еждневная подписка✅', callback_data='den')
+    button1=telebot.types.InlineKeyboardButton(text='ежедневная подписка✅', callback_data='den')
     button2=telebot.types.InlineKeyboardButton(text='еженедельная подписка✅', callback_data='nedelya')
 
     markup.add(button1)
-    markup.add(button2)    
+    markup.add(button2)
     answer='''
     этот бот находится в разработке⚙️🔧\n
     _______________________________________\n
@@ -71,12 +71,12 @@ def send_pogoda(message):
         answer='сейчас в '+place+' '+w.get_detailed_status()+'\n'
         answer+='Температура около '+str(tem)+' c°'+'\n'
         answer+= 'Влажность воздуха около '+str(humi)+' %'+'\n'
-        answer+='Скорость ветра окала '+str(wind)+' м/c'
+        answer+='Скорость ветра около '+str(wind)+' м/c'
 
     except pyowm.exceptions.api_response_error.NotFoundError:
       bot.send_message(message.chat.id, 'Город не найден :(')
-  
-       
+
+
 
 
 
