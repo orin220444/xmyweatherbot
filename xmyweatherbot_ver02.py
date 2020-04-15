@@ -53,7 +53,7 @@ def callback_inline(call):
     except:
 	       bot.send_message(message.chat.id, 'Ошибка!')
 #pogoda
-@bot.message_handler(commands='pogoda')
+@bot.message_handler(commands=['pogoda'])
 def send_pogoda(message):
     try:
         bot.send_message(message.chat.id,'какой город?')
