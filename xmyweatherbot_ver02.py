@@ -34,11 +34,12 @@ def help(message):
 
     markup.add(button1)
     markup.add(button2)    
-    
-    bot.send_message(chat_id=message.chat.id, text='''
+    answer='''
     этот бот находится в разработке⚙️🔧\n
     _______________________________________\n
-    можете подписатся на еже-дневную/недельную подписку✅:''', reply_markup=markup)
+
+    можете подписатся на еже-дневную/недельную подписку✅:'''
+    bot.send_message(chat_id=message.chat.id, text=answer, reply_markup=markup)
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
