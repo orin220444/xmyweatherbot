@@ -1,11 +1,18 @@
 #импорт
+import os
+from dotenv import load_dotenv
+dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
+if os.path.exists(dotenv_path):
+	load_dotenv(dotenv_path)
+
 import telebot
 import pyowm
 from telebot import types
 #owm
-owm = pyowm.OWM('b1c89f460a40430fd4a0214d984230ce',language='ru') 
+owm_key=os.getenv("OWM")
+owm = pyowm.OWM(owm_key,language='ru') 
 # telebot
-TOKEN='1129677508:AAEdpIa5SpUWam78lYud6rFyc2W-j4iVj5c'
+TOKEN=os.getenv("BOT_TOKEN")
 bot=telebot.TeleBot(TOKEN)
 
 
