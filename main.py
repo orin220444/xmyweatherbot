@@ -21,10 +21,10 @@ bot=telebot.TeleBot(TOKEN)
 def start(message):
     sticker = 'CAACAgIAAxkBAAPuXpNPjdOilp7Ja3mOu5T9S76S3CkAAiIBAAKmREgLEfW5zI8V9GYYBA'
     answer = """Добро пожаловать, {0.first_name}!
-    ----------------------------
-    Я - <b>{1.first_name}</b>, бот погоды)🌤
-    ----------------------------
-    чтобы ознакомится с ботом⚙️-/help."""
+----------------------------
+Я - <b>{1.first_name}</b>, бот погоды)🌤
+----------------------------
+чтобы ознакомится с ботом⚙️-/help."""
     bot.send_sticker(message.chat.id, sticker)
     bot.send_message(message.chat.id, answer.format(message.from_user, bot.get_me()),
         parse_mode='html')
@@ -41,10 +41,10 @@ def help(message):
     markup.add(button1)
     markup.add(button2)
     answer='''
-    этот бот находится в разработке⚙️🔧\n
-    _______________________________________\n
+этот бот находится в разработке⚙️🔧\n
+_______________________________________\n
 
-    можете подписаться на ежедневную/еденедельную подписку✅:'''
+можете подписаться на ежедневную/еденедельную подписку✅:'''
     bot.send_message(chat_id=message.chat.id, text=answer, reply_markup=markup)
 
 @bot.callback_query_handler(func=lambda call: True)
