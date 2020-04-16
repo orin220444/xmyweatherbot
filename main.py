@@ -88,8 +88,9 @@ def send_pogoda(message):
 
           bot.send_message(message.chat.id, answer)
      except pyowm.exceptions.api_response_error.NotFoundError:
-        bot.send_message(message.chat.id, 'Город не найден :(')
-
+        bot.send_message(message.chat.id, '''Город не найден :(
+Повторите попытку''')
+        bot.register_next_step_handler(message, send_pogoda)
 
 
 
