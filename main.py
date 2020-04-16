@@ -63,42 +63,32 @@ def callback_inline(call):
 def observation_request(message):
     try:
         bot.send_message(message.chat.id,'какой ваш город?')
-        @bot.message_handler(func=lambda m: True)
-        def send_pogoda(message):
-            try:
-                place=message.text
-                print(place)
-                observation = owm.weather_at_place(place)
-                w = observation.get_weather()
-                #переменная скорости ветра
-                wind=w.get_wind ()['speed']
-                #переменная влажности
-                humi=w.get_humidity ()
-                #переменная температуры
-                tem=w.get_temperature('celsius')['temp']
-
-                #сведения о погоде
-                answer='сейчас в '+place+' '+w.get_detailed_status()+'\n'
-                answer+='Температура около '+str(tem)+' c°'+'\n'
-                answer+= 'Влажность воздуха около '+str(humi)+' %'+'\n'
-                answer+='Скорость ветра около '+str(wind)+' м/c'
-
-                bot.send_message(message.chat.id, answer)
-            except pyowm.exceptions.api_response_error.NotFoundError:
-                bot.send_message(message.chat.id, 'Город не найден :(')
+        bot.register_next_step_handler(message, send_pogoda)
     except:
         bot.send_message(message.chat.id, 'Ошибка!')
+def send_pogoda(message):
+     try:
+          place=message.text
+          print(place)
+          observation = owm.weather_at_place(place)
+          w = observation.get_weather()
+          #переменная скорости ветра
+          wind=w.get_wind ()['speed']
+          #переменная влажности
+          humi=w.get_humidity ()
+                #переменная температуры
 
+          tem=w.get_temperature('celsius')['temp']
 
+                #сведения о погоде
+          answer='сейчас в '+place+' '+w.get_detailed_status()+'\n'
+          answer+='Температура около '+str(tem)+' c°'+'\n'
+          answer+= 'Влажность воздуха около '+str(humi)+' %'+'\n'
+          answer+='Скорость ветра около '+str(wind)+' м/c'
 
-
-
-
-
-
-
-
-
+          bot.send_message(message.chat.id, answer)
+     except pyowm.exceptions.api_response_error.NotFoundError:
+        bot.send_message(message.chat.id, 'Город не найден :(')
 
 
 
